@@ -154,6 +154,15 @@ class PixelStrip:
         """
         self[n] = color
 
+    def setPixelColors(self, colors, indices=None):
+        if indices is None:
+            indices = range(len(colors))
+        
+        for i, color in zip(indices, colors):
+            if isinstance(color, tuple):
+                color = Color(*color)
+            self.setPixelColor(i, color)
+
     def setPixelColorRGB(self, n, red, green, blue, white=0):
         """Set LED at position n to the provided red, green, and blue color.
         Each color component should be a value from 0 to 255 (where 0 is the
